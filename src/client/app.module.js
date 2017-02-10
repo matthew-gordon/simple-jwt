@@ -2,6 +2,9 @@
   'use strict';
 
   angular
-    .module('app', ['home.component']);
+    .module('app', [
+      'home.component',
+      'about.component'
+    ]);
 
 }());
