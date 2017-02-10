@@ -62,4 +62,12 @@ router.post('/login', (req, res, next) => {
   });
 });
 
+router.get('/user',
+  authHelpers.ensureAuthenticated,
+  (req, res, next) => {
+    res.status(200).json({
+      status: 'success'
+  });
+});
+
 module.exports = router;
