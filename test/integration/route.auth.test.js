@@ -40,4 +40,24 @@ describe('routes : auth', () => {
     });
   });
 
+  describe('POST /auth/login', () => {
+    it('should login a user', (done) => {
+      chai.request(server)
+      .post('/auth/login')
+      .send({
+        username: 'chris',
+        password: 'password123'
+      })
+      .end((err, res) => {
+        should.not.exist(err);
+        res.should.have.status(200);
+        res.should.be.a('object');
+        res.body.should.include.keys('status', 'token');
+        res.body.status.should.eql('success');
+        should.exist(res.body.token);
+        done();
+      });
+    });
+  });
+
 });
