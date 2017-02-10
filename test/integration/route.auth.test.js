@@ -89,7 +89,6 @@ describe('routes : auth', () => {
       .get('/auth/user')
       .set('authorization', 'Bearer ' + response.body.token)
       .end((err, res) => {
-        console.error(err);
         should.not.exist(err);
         res.status.should.eql(200);
         res.type.should.eql('application/json');
