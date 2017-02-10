@@ -45,7 +45,6 @@ router.patch('/:id', (req, res, next) => {
   })
   .then((classified) => {
     res.status(200).json(classified);
-    console.log(classified);
   }).catch((error) => {
     next(error);
   });

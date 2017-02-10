@@ -4,7 +4,7 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: 'postgres://localhost/classifieds',
+    connection: 'postgres://localhost/simpleJwt',
     migrations : {
       directory: __dirname + '/src/server/db/migrations'
     },
@@ -15,7 +15,7 @@ module.exports = {
 
   test: {
     client: 'pg',
-    connection: 'postgres://localhost/classifieds_test',
+    connection: 'postgres://localhost/simpleJwt_test',
     migrations : {
       directory: __dirname + '/src/server/db/migrations'
     },

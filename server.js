@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 const auth = require('./src/server/routes/auth');
 const messages = require('./src/server/routes/classifieds');
 
+require('dotenv').config();
+
 app.use('/', express.static(path.join(__dirname + '/src/client')));
 
 app.use(bodyParser.json());
