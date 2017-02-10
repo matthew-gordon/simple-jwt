@@ -33,10 +33,32 @@ router.post('/register', (req, res, next) => {
     res.status(200).json({
       message: 'success',
       token: token
-    })
+    });
   })
   .catch((err) => {
     next(err);
+  });
+});
+
+router.post('/login', (req, res, next) => {
+  const username = req.body.username;
+  const password = req.body.password;
+  return authHelpers.getSingle(username)
+  .then((user) => {
+    authHelpers.comparePass(password, user.password);
+    return user;
+  })
+  .then((user) => { return localAuth.encodeToken(user); })
+  .then((token) => {
+    res.status(200).json({
+      status: 'success',
+      token: token
+    });
+  })
+  .catch((error) => {
+    res.status(500).json({
+      status: 'error'
+    });
   });
 });
 

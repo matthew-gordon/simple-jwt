@@ -17,7 +17,9 @@ function createUser(req) {
 }
 
 function comparePass(userPassword, databasePassword) {
-  return bcrypt.compareSync(userPassword, databasePassword);
+  const bool = bcrypt.compareSync(userPassword, databasePassword);
+  if (!bool) { console.error('Bad password'); return false; }
+  else { return true; }
 }
 
 // *** query helper *** //
