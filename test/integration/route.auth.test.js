@@ -62,8 +62,8 @@ describe('routes : auth', () => {
       chai.request(server)
       .post('/auth/login')
       .send({
-        username: 'michael',
-        password: 'johnson123'
+        username: 'maverick',
+        password: 'password1234'
       })
       .end((err, res) => {
         should.exist(err);
