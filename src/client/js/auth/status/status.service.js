@@ -12,6 +12,7 @@
     /*jshint validthis: true */
     const baseURL = 'http://localhost:3000/auth/';
     this.ensureAuthenticated = (token) => {
+
       return $http({
         method: 'GET',
         url: baseURL + 'user',

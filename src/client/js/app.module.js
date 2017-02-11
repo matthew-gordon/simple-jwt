@@ -5,6 +5,7 @@
     .module('app', [
       'ui.router',
       'app.config',
+      'main.service',
       'main.component',
       'login.service',
       'login.component',

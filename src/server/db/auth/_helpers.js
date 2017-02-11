@@ -25,9 +25,8 @@ function comparePass(userPassword, databasePassword) {
 
 function ensureAuthenticated(req, res, next) {
   if (!(req.headers && req.headers.authorization)) {
-    return res.status(400).json({
-      status: 'Please log in'
-    });
+    console.log(req.headers.authorization);
+    console.log(req.headers);
   }
   // decode the token
   var header = req.headers.authorization.split(' ');
@@ -40,7 +39,7 @@ function ensureAuthenticated(req, res, next) {
     } else {
       // check if the user still exists in the db
       return knex('users').where({id: parseInt(payload.sub.id)}).first()
-      .then((user) => {
+      .then((payload) => {
         next();
       })
       .catch((err) => {

@@ -18,7 +18,7 @@
       .then((user) => {
         if (user.data.status === 'success');
         vm.isLoggedIn = true;
-        console.log(user.data);
+        console.log(token);
       })
       .catch((err) => {
         console.log(err);
