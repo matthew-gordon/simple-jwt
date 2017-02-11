@@ -6,6 +6,7 @@
       'ui.router',
       'app.config',
       'main.component',
+      'login.service',
       'login.component',
       'register.component'
     ]);
