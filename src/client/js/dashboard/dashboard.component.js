@@ -4,7 +4,7 @@
   angular
     .module('dashboard.component', [])
     .component('dashboard', {
-      templateUrl: 'js/auth/dashboard/dashboard.template.html',
+      templateUrl: 'js/dashboard/dashboard.template.html',
       controller: DashboardController
     });
 
