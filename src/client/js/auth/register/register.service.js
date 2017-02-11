@@ -6,7 +6,7 @@
     .module('register.service', [])
     .service('registerService', registerService);
 
-  loginService.$inject = ['$http'];
+  registerService.$inject = ['$http'];
 
   function registerService($http) {
     /*jshint validthis: true */

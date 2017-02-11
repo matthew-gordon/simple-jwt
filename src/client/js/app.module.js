@@ -8,6 +8,7 @@
       'main.component',
       'login.service',
       'login.component',
+      'register.service',
       'register.component'
     ]);
 }());
