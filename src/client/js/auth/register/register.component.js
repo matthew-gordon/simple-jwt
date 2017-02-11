@@ -4,6 +4,6 @@
   angular
     .module('register.component', [])
     .component('register', {
-      templateUrl: 'js/auth/register.template.html'
+      templateUrl: 'js/auth/register/register.template.html'
     })
 }());

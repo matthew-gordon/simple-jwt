@@ -5,6 +5,7 @@
     .module('app', [
       'ui.router',
       'app.config',
+      'main.component',
       'login.component',
       'register.component'
     ]);

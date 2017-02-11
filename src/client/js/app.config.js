@@ -12,8 +12,13 @@
 
     $stateProvider
       .state({
-        name: 'register',
+        name: 'home',
         url: '/',
+        component: 'main'
+      })
+      .state({
+        name: 'register',
+        url: '/register',
         component: 'register'
       })
       .state({

@@ -17,6 +17,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/auth', auth);
 app.use('/classifieds', messages);
 
+app.use('*', (req, res, next) => {
+  res.sendFile('index.html', {root: path.join(__dirname, 'src/client')});
+});
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {

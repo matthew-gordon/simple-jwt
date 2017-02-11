@@ -4,6 +4,6 @@
   angular
     .module('login.component', [])
     .component('login', {
-      templateUrl: 'js/auth/login.template.html'
+      templateUrl: 'js/auth/login/login.template.html'
     })
 }());
