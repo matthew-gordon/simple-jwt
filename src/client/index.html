@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html ng-app="app">
-  <head>
-    <meta charset="utf-8">
-    <base href="/">
-    <title>Simple JWT</title>
+<head>
+  <meta charset="utf-8">
+  <base href="/">
+  <title>Simple JWT app</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <!-- skeleton CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" />
-
+    <!-- <link rel="stylesheet" href="css/styles.css"> -->
   </head>
   <body>
 
-    <div class="container">
+  <div class="container">
+    <h1>Hello World</h1>
+    <ui-view></ui-view>
+  </div>
 
-      <ui-view></ui-view>
-
-    </div>
 
     <!-- Angular -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
+
     <script src="https://unpkg.com/angular-ui-router@1.0.0-beta.3/release/angular-ui-router.js"></script>
 
-    <!-- app -->
-    <script type="text/javascript" src="/main/home.component.js"></script>
-    <script type="text/javascript" src="/about/about.component.js"></script>
-    <script type="text/javascript" src="/app.module.js"></script>
+
+    <!-- App -->
+    <script src="js/auth/register.component.js"></script>
+    <script src="js/auth/login.component.js"></script>
+    <script src="js/app.config.js"></script>
+    <script src="js/app.module.js"></script>
 
   </body>
 </html>
