@@ -13,6 +13,16 @@
     function LoginController(loginService) {
       const vm = this;
       vm.test = 'just a test';
-      console.log(loginService.test());
+      const sampleUser = {
+        username: 'matt',
+        password: 'password123'
+      };
+      loginService.login(sampleUser)
+      .then((user) => {
+        console.log(user.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     }
 }());

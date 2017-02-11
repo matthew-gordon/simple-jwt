@@ -6,12 +6,18 @@
     .module('login.service', [])
     .service('loginService', loginService);
 
-  loginService.$inject = [];
+  loginService.$inject = ['$http'];
 
-  function loginService() {
+  function loginService($http) {
     /*jshint validthis: true */
-    this.test = function() {
-      return 'working';
+    const baseURL = 'http://localhost:3000/auth/';
+    this.login = (user) => {
+      return $http({
+        method: 'POST',
+        url: baseURL + 'login',
+        data: user,
+        headers: {'Content-Type': 'application/json'}
+      });
     };
   }
 
