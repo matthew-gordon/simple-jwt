@@ -8,15 +8,16 @@
       controller: LoginController
     });
 
-    LoginController.$inject = ['loginService'];
+    LoginController.$inject = ['loginService', '$state'];
 
-    function LoginController(loginService) {
+    function LoginController(loginService, $state) {
       const vm = this;
       vm.user = {};
       vm.onLogin = () => {
         loginService.login(vm.user)
         .then((user) => {
-          console.log(user.data);
+          localStorage.setItem('token', user.data.token);
+          $state.go('status');
         })
         .catch((err) => {
           console.log(err);

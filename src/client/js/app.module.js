@@ -9,6 +9,8 @@
       'login.service',
       'login.component',
       'register.service',
-      'register.component'
+      'register.component',
+      'status.service',
+      'status.component'
     ]);
 }());

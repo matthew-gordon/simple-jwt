@@ -8,15 +8,16 @@
       controller: RegisterController
     });
 
-  RegisterController.$inject = ['registerService'];
-  function RegisterController(registerService) {
+  RegisterController.$inject = ['registerService', '$state'];
+  function RegisterController(registerService, $state) {
     const vm = this;
     vm.user = {};
 
     vm.onRegister = function() {
       registerService.register(vm.user)
       .then((user) => {
-        console.log(user.data);
+        localStorage.setItem('token', user.data.token);
+        $state.go('status');
       })
       .catch((err) => {
         console.log(err);

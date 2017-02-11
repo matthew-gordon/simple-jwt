@@ -25,6 +25,11 @@
         name: 'login',
         url: '/login',
         component: 'login'
+      })
+      .state({
+        name: 'status',
+        url: '/status',
+        component: 'status'
       });
   }
 
