@@ -12,17 +12,15 @@
 
     function LoginController(loginService) {
       const vm = this;
-      vm.test = 'just a test';
-      const sampleUser = {
-        username: 'matt',
-        password: 'password123'
+      vm.user = {};
+      vm.onLogin = () => {
+        loginService.login(vm.user)
+        .then((user) => {
+          console.log(user.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
       };
-      loginService.login(sampleUser)
-      .then((user) => {
-        console.log(user.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
     }
 }());

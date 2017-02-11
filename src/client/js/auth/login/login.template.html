@@ -1,15 +1,15 @@
 <div class="row">
   <div class="col-md-4">
-    <h1>Login</h1>
+      <h1>Login</h1>
     <hr><br>
-    <form ng-submit="authLoginCtrl.onLogin()" novalidate>
+    <form ng-submit="$ctrl.onLogin($ctrl.user)">
      <div class="form-group">
        <label for="username">Username</label>
-       <input type="text" class="form-control" id="username" placeholder="enter username" ng-model="authLoginCtrl.user.username" required>
+       <input name="username" ng-model="$ctrl.user.username" type="text" class="form-control" id="username" placeholder="enter username">
      </div>
      <div class="form-group">
        <label for="passwowrd">Password</label>
-       <input type="password" class="form-control" id="passwowrd" placeholder="enter password" ng-model="authLoginCtrl.user.password" required>
+       <input name="password" ng-model="$ctrl.user.password" type="password" class="form-control" id="passwowrd" placeholder="enter password">
      </div>
      <button type="submit" class="btn btn-default">Submit</button>
     </form>
