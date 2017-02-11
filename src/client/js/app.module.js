@@ -11,7 +11,7 @@
       'login.component',
       'register.service',
       'register.component',
-      'status.service',
-      'status.component'
+      'dashboard.service',
+      'dashboard.component'
     ]);
 }());

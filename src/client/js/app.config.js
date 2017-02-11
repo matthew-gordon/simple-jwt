@@ -32,9 +32,9 @@
           component: 'login'
         })
         .state({
-          name: 'status',
-          url: '/status',
-          component: 'status',
+          name: 'dashboard',
+          url: '/dashboard',
+          component: 'dashboard',
           onEnter: ($location) => {
             if(!localStorage.getItem('token')) { $location.path('/login'); } else {
               console.log('YOU HAVE A TOKEN!!!!!');

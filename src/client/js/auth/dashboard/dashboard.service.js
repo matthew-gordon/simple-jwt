@@ -3,12 +3,12 @@
   'use strict';
 
   angular
-    .module('status.service', [])
-    .service('statusService', statusService);
+    .module('dashboard.service', [])
+    .service('dashboardService', dashboardService);
 
-  statusService.$inject = ['$http'];
+  dashboardService.$inject = ['$http', '$location'];
 
-  function statusService($http) {
+  function dashboardService($http) {
     /*jshint validthis: true */
     const baseURL = 'http://localhost:3000/auth/';
     this.ensureAuthenticated = (token) => {

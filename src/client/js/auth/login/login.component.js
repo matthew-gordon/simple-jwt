@@ -17,7 +17,7 @@
         loginService.login(vm.user)
         .then((user) => {
           localStorage.setItem('token', user.data.token);
-          $state.go('status');
+          $state.go('dashboard');
         })
         .catch((err) => {
           console.log(err);
