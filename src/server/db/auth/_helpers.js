@@ -41,7 +41,7 @@ function ensureAuthenticated(req, res, next) {
       return getSingle(payload.sub.username).first()
       .then((user) => {
         return res.status(200).json({
-          status: 'authenticated',
+          status: 'success',
           username: user.username,
           admin: user.admin
         });
