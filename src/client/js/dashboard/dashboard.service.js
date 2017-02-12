@@ -6,7 +6,7 @@
     .module('dashboard.service', [])
     .service('dashboardService', dashboardService);
 
-  dashboardService.$inject = ['$http', '$location'];
+  dashboardService.$inject = ['$http'];
 
   function dashboardService($http) {
     /*jshint validthis: true */

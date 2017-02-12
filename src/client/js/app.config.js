@@ -11,7 +11,7 @@
       '$locationProvider'
     ];
 
-    function config($stateProvider, $urlRouterProvider, $locationProvider, $state) {
+    function config($stateProvider, $urlRouterProvider, $locationProvider) {
 
       $locationProvider.html5Mode(true);
 
@@ -19,7 +19,7 @@
         .state({
           name: 'home',
           url: '/',
-          component: 'main',
+          component: 'main'
         })
         .state({
           name: 'register',
@@ -29,18 +29,24 @@
         .state({
           name: 'login',
           url: '/login',
-          component: 'login'
+          component: 'login',
         })
         .state({
           name: 'dashboard',
           url: '/dashboard',
           component: 'dashboard',
-          onEnter: ($location) => {
-            if(!localStorage.getItem('token')) { $location.path('/login'); } else {
-              console.log('YOU HAVE A TOKEN!!!!!');
-            }
-          }
+          onEnter: authenticate
         });
-    }
+        $urlRouterProvider.otherwise('/login');
+      }
 
+      function authenticate(dashboardService, $location) {
+        const token = localStorage.getItem('token');
+        if(token) {
+          dashboardService.ensureAuthenticated(token)
+          .then((response) => { dashboardService.current_user = response.data; });
+        } else {
+          $location.path('login');
+        }
+      }
 }());

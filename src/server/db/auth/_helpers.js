@@ -38,10 +38,13 @@ function ensureAuthenticated(req, res, next) {
         status: 'Token has expired'
       });
     } else {
-      // check if the user still exists in the db
-      return knex('users').where({id: parseInt(payload.sub.id)}).first()
-      .then((payload) => {
-        next();
+      return getSingle(payload.sub.username).first()
+      .then((user) => {
+        return res.status(200).json({
+          status: 'authenticated',
+          username: user.username,
+          admin: user.admin
+        });
       })
       .catch((err) => {
         res.status(500).json({

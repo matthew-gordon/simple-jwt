@@ -6,11 +6,6 @@ const router = express.Router();
 const authHelpers = require('../db/auth/_helpers');
 const localAuth = require('../db/auth/local');
 
-router.use((req,res,next) => {
-  res.setHeader('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0ODgwMDI2NzMsImlhdCI6MTQ4Njc5MzA3Mywic3ViIjp7ImlkIjoxLCJ1c2VybmFtZSI6ImNocmlzIn19.Ywnt0YgYzCCjuLfP1W5X8Dla3u6qhrOpmRrA8HnQwLY');
-  next();
-});
-
 router.get('/users', (req, res, next) => {
   authHelpers.getUsers()
   .then((users) => {
@@ -71,9 +66,8 @@ router.get('/user',
   authHelpers.ensureAuthenticated,
   (req, res, next) => {
     res.status(200).json({
-      status: 'success'
-  });
-  // console.log(res);
+      status: 'success',
+    });
 });
 
 module.exports = router;

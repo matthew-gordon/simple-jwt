@@ -20,7 +20,7 @@
         .then((user) => {
           if (user.data.status === 'success');
           vm.isLoggedIn = true;
-          console.log(token);
+          vm.current_user = dashboardService.current_user;
         })
         .catch((err) => {
           console.log(err);
