@@ -1,7 +1,7 @@
 'use strict';
 
 const knex = require('../knex');
-const bcrypt = require("bcryptjs");
+const bcrypt = require('bcryptjs');
 const localAuth = require('./local');
 
 // *** utilities *** //
