@@ -17,5 +17,7 @@ Run seeds
 ```knex seed:run```
 ```knex seed:run --env test```
 
+ADD .env with TOKEN_SECRET
+
 Run test suite
 ```yarn test (npm test)```
