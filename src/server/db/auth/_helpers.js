@@ -19,8 +19,11 @@ function createUser(req) {
 
 function comparePass(userPassword, databasePassword) {
   const bool = bcrypt.compareSync(userPassword, databasePassword);
-  if (!bool) { console.error('Bad password'); return false; }
-  else { return true; }
+  if (!bool) {
+    throw new Error('bad pass silly money');
+  } else {
+    return true;
+  }
 }
 
 function ensureAuthenticated(req, res, next) {

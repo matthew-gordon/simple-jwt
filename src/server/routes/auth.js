@@ -6,7 +6,7 @@ const router = express.Router();
 const authHelpers = require('../db/auth/_helpers');
 const localAuth = require('../db/auth/local');
 
-router.get('/users', (req, res, next) => {
+router.get('/users', authHelpers.ensureAuthenticated, (req, res, next) => {
   authHelpers.getUsers()
   .then((users) => {
     res.status(200).json(users);

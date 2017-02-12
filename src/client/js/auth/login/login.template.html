@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-md-4">
       <h1>Login</h1>
+      <div ng-if="$ctrl.loginError" class="alert alert-danger" role="alert">Invalid Password</div>
     <hr><br>
     <form ng-submit="$ctrl.onLogin($ctrl.user)">
      <div class="form-group">

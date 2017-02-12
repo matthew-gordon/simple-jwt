@@ -13,6 +13,7 @@
     function LoginController(loginService, $state) {
       const vm = this;
       vm.user = {};
+      vm.loginError = false;
       vm.onLogin = () => {
         loginService.login(vm.user)
         .then((user) => {
@@ -20,7 +21,9 @@
           $state.go('dashboard');
         })
         .catch((err) => {
-          console.log(err);
+          if (err) {
+            vm.loginError = true;
+          }
         });
       };
     }

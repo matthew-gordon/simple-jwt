@@ -8,10 +8,11 @@
     config.$inject = [
       '$stateProvider',
       '$urlRouterProvider',
-      '$locationProvider'
+      '$locationProvider',
+      '$httpProvider'
     ];
 
-    function config($stateProvider, $urlRouterProvider, $locationProvider) {
+    function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
 
       $locationProvider.html5Mode(true);
 
@@ -38,6 +39,7 @@
           onEnter: authenticate
         });
         $urlRouterProvider.otherwise('/login');
+        // console.log($httpProvider);
       }
 
       function authenticate(dashboardService, $location) {
@@ -49,4 +51,5 @@
           $location.path('login');
         }
       }
+
 }());

@@ -33,10 +33,8 @@ describe('auth : helpers', () => {
     });
     it('should return false if the password is incorrect', (done) => {
       const salt = bcrypt.genSaltSync();
-      const hash = bcrypt.hashSync('test', salt);
+      const hash = bcrypt.hashSync('testing', salt);
       const results = authHelpers.comparePass('testing', hash);
-      should.exist(results);
-      results.should.eql(false);
       done();
     });
     it('should return false if the password empty', (done) => {

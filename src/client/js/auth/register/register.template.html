@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-md-4">
       <h1>Register</h1>
+      <div ng-if="$ctrl.loginError" class="alert alert-warning" role="alert">Username Exists</div>
     <hr><br>
     <form ng-submit="$ctrl.onRegister($ctrl.user)">
      <div class="form-group">

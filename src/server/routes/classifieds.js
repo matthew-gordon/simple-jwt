@@ -2,10 +2,11 @@
 
 const express = require('express');
 const router = express.Router();
+const authHelpers = require('../db/auth/_helpers');
 const queries = require('../db/queries');
 
 // *** GET all classifieds *** //
-router.get('/', (req, res, next) => {
+router.get('/', authHelpers.ensureAuthenticated, (req, res, next) => {
   queries.getAll()
   .then((classifieds) => {
     res.status(200).json(classifieds);
@@ -15,7 +16,7 @@ router.get('/', (req, res, next) => {
 });
 
 // *** GET single classified by id *** //
-router.get('/:id', (req, res, next) => {
+router.get('/:id', authHelpers.ensureAuthenticated, (req, res, next) => {
   queries.getSingle(req.params.id)
   .then((classified) => {
     res.status(200).json(classified);
@@ -25,7 +26,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 // *** POST create single classified *** //
-router.post('/', (req, res, next) => {
+router.post('/', authHelpers.ensureAuthenticated, (req, res, next) => {
   queries.add(req.body)
   .then((classifiedID) => {
     return queries.getSingle(classifiedID);
@@ -38,7 +39,7 @@ router.post('/', (req, res, next) => {
 });
 
 // *** PATCH update single classified by id *** //
-router.patch('/:id', (req, res, next) => {
+router.patch('/:id', authHelpers.ensureAuthenticated, (req, res, next) => {
   queries.update(req.params.id, req.body)
   .then(() => {
     return queries.getSingle(req.params.id);
@@ -51,7 +52,7 @@ router.patch('/:id', (req, res, next) => {
 });
 
 // *** DELETE single classified by id *** //
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', authHelpers.ensureAuthenticated, (req, res, next) => {
   queries.getSingle(req.params.id)
   .then((classified) => {
     queries.deleteClassified(req.params.id)

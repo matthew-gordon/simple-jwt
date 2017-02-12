@@ -20,7 +20,9 @@
         $state.go('dashboard');
       })
       .catch((err) => {
-        console.log(err);
+        if (err) {
+          vm.loginError = true;
+        }
       });
     };
   }
