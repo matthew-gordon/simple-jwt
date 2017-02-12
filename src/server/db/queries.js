@@ -2,38 +2,28 @@
 
 const knex = require('./knex');
 
-// *** Helper *** //
+// *** query helper *** //
 
-function classifieds() {
-  return knex('classifieds').select('id', 'title', 'description', 'price', 'item_image');
+function users() {
+  return knex('users');
 }
 
-// *** classifieds queries *** //
+// *** queries *** //
 
-function getAll() {
-  return classifieds();
+function getUsers() {
+  return users().select();
 }
 
-function getSingle(classifiedID) {
-  return classifieds().where('id', parseInt(classifiedID)).first();
+function getSingle(username) {
+  return users().where('username', username).first();
 }
 
-function add(classified) {
-  return classifieds().insert(classified, 'id');
-}
-
-function update(classifiedID, updates) {
-  return classifieds().where('id', parseInt(classifiedID)).update(updates);
-}
-
-function deleteClassified(classifiedID) {
-  return classifieds().where('id', parseInt(classifiedID)).del();
+function add(user) {
+  return users().insert(user);
 }
 
 module.exports = {
-  getAll: getAll,
-  getSingle: getSingle,
-  add: add,
-  update: update,
-  deleteClassified: deleteClassified
+  getUsers,
+  getSingle,
+  add
 };

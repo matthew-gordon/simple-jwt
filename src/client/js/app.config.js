@@ -13,7 +13,7 @@
     ];
 
     function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
-
+      const token = localStorage.getItem('token');
       $locationProvider.html5Mode(true);
 
       $stateProvider
@@ -39,10 +39,12 @@
           onEnter: authenticate
         });
         $urlRouterProvider.otherwise('/login');
-        // console.log($httpProvider);
+        if(token) {
+          $httpProvider.interceptors.push('mainService');
+        }
       }
 
-      function authenticate(dashboardService, $location) {
+      function authenticate(dashboardService, $location, $http) {
         const token = localStorage.getItem('token');
         if(token) {
           dashboardService.ensureAuthenticated(token)

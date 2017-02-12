@@ -6,37 +6,17 @@ const router = express.Router();
 const authHelpers = require('../db/auth/_helpers');
 const localAuth = require('../db/auth/local');
 
-router.get('/users', authHelpers.ensureAuthenticated, (req, res, next) => {
-  authHelpers.getUsers()
-  .then((users) => {
-    res.status(200).json(users);
-  })
-  .catch((error) => {
-    next(error);
-  });
-});
-
-router.get('/users/:username', (req, res, next) => {
-  authHelpers.getSingle(req.params.username)
-  .then((user) => {
-    res.status(200).json(user);
-  })
-  .catch((error) => {
-    next(error);
-  });
-});
-
 router.post('/register', (req, res, next) => {
   return authHelpers.createUser(req)
   .then((user) => {
     const token = localAuth.encodeToken(user[0]);
     res.status(200).json({
-      message: 'success',
+      message: 'Registered',
       token: token
     });
   })
   .catch((err) => {
-    next(err);
+    return next(new Error('Username already exists'));
   });
 });
 
@@ -60,14 +40,6 @@ router.post('/login', (req, res, next) => {
       status: 'error'
     });
   });
-});
-
-router.get('/user',
-  authHelpers.ensureAuthenticated,
-  (req, res, next) => {
-    res.status(200).json({
-      status: 'success',
-    });
 });
 
 module.exports = router;
