@@ -5,13 +5,12 @@
     .module('app', [
       'ui.router',
       'app.config',
+      // 'api.interceptor',
       'main.service',
       'main.component',
-      'login.service',
+      'auth.service',
       'login.component',
-      'register.service',
       'register.component',
-      'dashboard.service',
       'dashboard.component'
     ]);
 }());

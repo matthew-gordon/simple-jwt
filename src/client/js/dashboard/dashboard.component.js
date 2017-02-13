@@ -8,30 +8,31 @@
       controller: DashboardController
     });
 
-    DashboardController.$inject = ['dashboardService', '$location'];
+    DashboardController.$inject = ['authService', '$location', '$state'];
 
-    function DashboardController(dashboardService, $location) {
-      const vm = this;
+    function DashboardController(authService, $location, $state) {
+      let vm = this;
       const token = localStorage.getItem('token');
+
       vm.isLoggedIn = false;
 
+      vm.onLogout = () => {
+        vm.isLoggedIn = false;
+        $state.go('login');
+        localStorage.clear();
+      };
+
       if (token) {
-        dashboardService.ensureAuthenticated(token)
+        authService.ensureAuthenticated(token)
         .then((user) => {
           if (user.data.status === 'success');
           vm.isLoggedIn = true;
-          vm.current_user = dashboardService.current_user;
+          vm.current_user = user.data;
         })
         .catch((err) => {
-          console.log(err);
+          throw new Error(err);
         });
       }
-
-      vm.logout = () => {
-        localStorage.clear();
-        $location.path('/');
-        console.log('Logged Out');
-      };
 
     }
 }());

@@ -21,7 +21,7 @@ function decodeToken(token, callback) {
   const decoded = jwt.verify(token, secret);
   const now = moment().unix();
   if (now > decoded.exp) callback('Token has expired.');
-  else callback(null, decoded)
+  else callback(null, decoded);
 }
 
 module.exports = {

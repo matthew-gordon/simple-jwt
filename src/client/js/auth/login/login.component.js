@@ -8,23 +8,26 @@
       controller: LoginController
     });
 
-    LoginController.$inject = ['loginService', '$state'];
+  LoginController.$inject = ['authService', '$state'];
 
-    function LoginController(loginService, $state) {
-      const vm = this;
-      vm.user = {};
-      vm.loginError = false;
-      vm.onLogin = () => {
-        loginService.login(vm.user)
-        .then((user) => {
-          localStorage.setItem('token', user.data.token);
+  function LoginController(authService, $state) {
+    const vm = this;
+    vm.user = {};
+    vm.loginError = false;
+
+    vm.onLogin = () => {
+      authService.login(vm.user)
+      .then((response) => {
+        if (response.data.status === 'Error') {
+          vm.loginError = true;
+        } else {
+          localStorage.setItem('token', response.data.token);
           $state.go('dashboard');
-        })
-        .catch((err) => {
-          if (err) {
-            vm.loginError = true;
-          }
-        });
-      };
-    }
+        }
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+    };
+  }
 }());

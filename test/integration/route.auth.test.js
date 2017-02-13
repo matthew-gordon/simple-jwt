@@ -54,4 +54,74 @@ describe('routes : auth', () => {
     });
   });
 
+  describe('POST /auth/login', () => {
+    it('should login a registered user', (done) => {
+      chai.request(server)
+      .post('/auth/login')
+      .send({
+        username: 'matt',
+        password: 'password123'
+      })
+      .end((err, res) => {
+        should.not.exist(err);
+        res.status.should.eql(200);
+        res.type.should.eql('application/json');
+        res.body.should.include.keys('status', 'token');
+        res.body.status.should.eql('Success');
+        done();
+      });
+    });
+    it('should throw an error if password incorrect', (done) => {
+      chai.request(server)
+      .post('/auth/login')
+      .send({
+        username: 'matt',
+        password: 'password1234'
+      })
+      .end((err, res) => {
+        should.exist(err);
+        res.status.should.eql(500);
+        res.body.should.have.keys('status', 'message');
+        res.body.status.should.eql('Error');
+        res.body.message.should.eql('Invalid username/password');
+        done();
+      });
+    });
+  });
+
+  describe('GET /auth/user', () => {
+    it('should return a success', (done) => {
+      chai.request(server)
+      .post('/auth/login')
+      .send({
+        username: 'matt',
+        password: 'password123'
+      })
+      .end((error, response) => {
+        should.not.exist(error);
+        chai.request(server)
+        .get('/auth/user')
+        .set('authorization', 'Bearer ' + response.body.token)
+        .end((err, res) => {
+          should.not.exist(err);
+          res.status.should.eql(200);
+          res.type.should.eql('application/json');
+          res.body.status.should.eql('success');
+          done();
+        });
+      });
+    });
+    it('should throw an error if a user is not logged in', (done) => {
+      chai.request(server)
+      .get('/auth/user')
+      .end((err, res) => {
+        should.exist(err);
+        res.status.should.eql(400);
+        res.type.should.eql('application/json');
+        res.body.status.should.eql('Please log in');
+        done();
+      });
+    });
+  });
+
 });

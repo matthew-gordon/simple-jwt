@@ -14,7 +14,7 @@ function getUsers() {
   return users().select();
 }
 
-function getSingle(username) {
+function getUser(username) {
   return users().where('username', username).first();
 }
 
@@ -24,6 +24,6 @@ function add(user) {
 
 module.exports = {
   getUsers,
-  getSingle,
+  getUser,
   add
 };

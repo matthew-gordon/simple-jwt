@@ -8,21 +8,25 @@
       controller: RegisterController
     });
 
-  RegisterController.$inject = ['registerService', '$state'];
-  function RegisterController(registerService, $state) {
+  RegisterController.$inject = ['authService', '$state'];
+
+  function RegisterController(authService, $state) {
     const vm = this;
     vm.user = {};
+    vm.registerError = false;
 
-    vm.onRegister = function() {
-      registerService.register(vm.user)
-      .then((user) => {
-        localStorage.setItem('token', user.data.token);
-        $state.go('dashboard');
+    vm.onRegister = () => {
+      authService.register(vm.user)
+      .then((response) => {
+        if (response.data.status === 'Error') {
+          vm.registerError = true;
+        } else {
+          localStorage.setItem('token', response.data.token);
+          $state.go('dashboard');
+        }
       })
       .catch((err) => {
-        if (err) {
-          vm.loginError = true;
-        }
+        return new Error(err);
       });
     };
   }

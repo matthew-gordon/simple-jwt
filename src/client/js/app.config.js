@@ -14,6 +14,7 @@
 
     function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
       const token = localStorage.getItem('token');
+
       $locationProvider.html5Mode(true);
 
       $stateProvider
@@ -38,17 +39,17 @@
           component: 'dashboard',
           onEnter: authenticate
         });
-        $urlRouterProvider.otherwise('/login');
-        if(token) {
-          $httpProvider.interceptors.push('mainService');
-        }
+
+        $urlRouterProvider.otherwise('/');
+        if(token) { $httpProvider.interceptors.push('apiInterceptor'); }
+
       }
 
-      function authenticate(dashboardService, $location, $http) {
+      function authenticate(authService, $location, $http) {
         const token = localStorage.getItem('token');
         if(token) {
-          dashboardService.ensureAuthenticated(token)
-          .then((response) => { dashboardService.current_user = response.data; });
+          authService.ensureAuthenticated(token)
+          .then((response) => { authService.current_user = response.data; });
         } else {
           $location.path('login');
         }

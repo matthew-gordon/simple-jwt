@@ -12,7 +12,6 @@
   </head>
   <body>
 
-  <navbar></navbar>
   <div class="container">
     <ui-view></ui-view>
   </div>
@@ -23,21 +22,19 @@
 
     <script src="https://unpkg.com/angular-ui-router@1.0.0-beta.3/release/angular-ui-router.js"></script>
 
-    <!-- app -->
+    <!-- services -->
     <script src="js/main/main.service.js"></script>
-    <script src="js/main/main.component.js"></script>
+    <script src="js/auth/auth.service.js"></script>
 
-    <!-- register -->
-    <script src="js/auth/register/register.service.js"></script>
+    <!-- components -->
+    <script src="js/main/main.component.js"></script>
     <script src="js/auth/register/register.component.js"></script>
-    <!-- login -->
-    <script src="js/auth/login/login.service.js"></script>
     <script src="js/auth/login/login.component.js"></script>
-    <!-- dashboard -->
-    <script src="js/dashboard/dashboard.service.js"></script>
     <script src="js/dashboard/dashboard.component.js"></script>
-    
+
+    <!-- app -->
     <script src="js/app.config.js"></script>
+    <script src="js/app.service.js"></script>
     <script src="js/app.module.js"></script>
 
   </body>

@@ -5,6 +5,7 @@ const express = require('express');
 const router = express.Router();
 const authHelpers = require('../db/auth/_helpers');
 const localAuth = require('../db/auth/local');
+const queries = require('../db/queries');
 
 router.post('/register', (req, res, next) => {
   return authHelpers.createUser(req)
@@ -16,29 +17,46 @@ router.post('/register', (req, res, next) => {
     });
   })
   .catch((err) => {
-    return next(new Error('Username already exists'));
+    res.status(500).json({
+      status: 'Error',
+      message: 'Username already exists'
+    });
   });
 });
 
 router.post('/login', (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
-  return authHelpers.getSingle(username)
-  .then((user) => {
-    authHelpers.comparePass(password, user.password);
-    return user;
+  return queries.getUser(username)
+  .then((response) => {
+    const bool = authHelpers.comparePass(password, response.password);
+    if(bool) return response;
+    else return next();
   })
-  .then((user) => { return localAuth.encodeToken(user); })
+  .then((response) => { return localAuth.encodeToken(response); })
   .then((token) => {
     res.status(200).json({
-      status: 'success',
+      status: 'Success',
       token: token
     });
   })
-  .catch((error) => {
+  .catch((err) => {
     res.status(500).json({
-      status: 'error'
+      status: 'Error',
+      message: 'Invalid username/password'
     });
+  });
+});
+
+router.get('/humbled', authHelpers.ensureAuthenticated, (req, res, next) => {
+  res.send('Welcome boy!!!!');
+});
+
+router.get('/user',
+  authHelpers.ensureAuthenticated,
+  (req, res, next)  => {
+  res.status(200).json({
+    status: 'success'
   });
 });
 
