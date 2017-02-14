@@ -41,7 +41,8 @@
         });
 
         $urlRouterProvider.otherwise('/');
-        if(token) { $httpProvider.interceptors.push('apiInterceptor'); }
+
+        if (token) { $httpProvider.interceptors.push('apiInterceptor'); }
 
       }
 

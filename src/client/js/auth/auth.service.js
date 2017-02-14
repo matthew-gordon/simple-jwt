@@ -30,16 +30,16 @@
       });
     };
 
-    // this.ensureAuthenticated = (token) => {
-    //   return $http({
-    //     method: 'GET',
-    //     url: baseURL + 'user',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       Authorization: 'Bearer ' + token
-    //     }
-    //   });
-    // };
+    this.ensureAuthenticated = (token) => {
+      return $http({
+        method: 'GET',
+        url: baseURL + 'user',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token
+        }
+      });
+    };
 
   }
 

@@ -18,14 +18,11 @@
     vm.onRegister = () => {
       authService.register(vm.user)
       .then((response) => {
-        if (response.data.status === 'Error') {
-          vm.registerError = true;
-        } else {
-          localStorage.setItem('token', response.data.token);
-          $state.go('dashboard');
-        }
+        localStorage.setItem('token', response.data.token);
+        $state.go('dashboard');
       })
       .catch((err) => {
+        vm.registerError = true;
         return new Error(err);
       });
     };

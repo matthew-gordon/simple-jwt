@@ -18,15 +18,13 @@
     vm.onLogin = () => {
       authService.login(vm.user)
       .then((response) => {
-        if (response.data.status === 'Error') {
-          vm.loginError = true;
-        } else {
-          localStorage.setItem('token', response.data.token);
-          $state.go('dashboard');
-        }
+        localStorage.setItem('token', response.data.token);
+        $state.go('dashboard');
       })
       .catch((err) => {
-        throw new Error(err);
+        vm.loginError = true;
+        vm.loginForm.$setPristine();
+        return new Error(err);
       });
     };
   }

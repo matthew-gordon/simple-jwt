@@ -2,5 +2,6 @@
 
 <h2>Welcome User {{ $ctrl.current_user.username }}</h2>
 <p>Logged in? {{ $ctrl.isLoggedIn }}</p>
+<p>{{ $ctrl.current_user.bio }}</p>
 
 <button ng-click="$ctrl.onLogout()" type="button" class="btn btn-warning">Log Out</button>

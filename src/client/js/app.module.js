@@ -5,7 +5,7 @@
     .module('app', [
       'ui.router',
       'app.config',
-      // 'api.interceptor',
+      'api.interceptor',
       'main.service',
       'main.component',
       'auth.service',

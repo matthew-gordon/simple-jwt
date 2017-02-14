@@ -7,19 +7,22 @@ const authHelpers = require('../db/auth/_helpers');
 const localAuth = require('../db/auth/local');
 const queries = require('../db/queries');
 
-router.post('/register', (req, res, next) => {
+router.post('/register', (req, res, next)  => {
   return authHelpers.createUser(req)
-  .then((user) => {
-    const token = localAuth.encodeToken(user[0]);
+  .then((response) => {
+    console.log(response.body);
+    return localAuth.encodeToken(response[0]);
+  })
+  .then((token) => {
     res.status(200).json({
-      message: 'Registered',
+      status: 'success',
       token: token
     });
   })
   .catch((err) => {
     res.status(500).json({
-      status: 'Error',
-      message: 'Username already exists'
+      status: 'error',
+      message: 'username already exists'
     });
   });
 });
@@ -42,8 +45,8 @@ router.post('/login', (req, res, next) => {
   })
   .catch((err) => {
     res.status(500).json({
-      status: 'Error',
-      message: 'Invalid username/password'
+      status: 'error',
+      message: 'Invalid password'
     });
   });
 });

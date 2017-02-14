@@ -11,13 +11,7 @@ function createUser(req) {
   const salt = bcrypt.genSaltSync();
   const hash = bcrypt.hashSync(req.body.password, salt);
   return queries.add({ username: req.body.username, password: hash })
-  .returning('*')
-  .then((response) => {
-    return response;
-  })
-  .catch((err) => {
-    return new Error(err);
-  });
+  .returning('*');
 }
 
 function comparePass(userPassword, databasePassword) {
@@ -47,6 +41,7 @@ function ensureAuthenticated(req, res, next) {
         return res.status(200).json({
           status: 'success',
           username: user.username,
+          bio: user.bio,
           admin: user.admin
         });
 

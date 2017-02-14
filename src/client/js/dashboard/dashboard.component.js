@@ -14,14 +14,10 @@
       let vm = this;
       const token = localStorage.getItem('token');
 
-      vm.isLoggedIn = false;
-
       vm.onLogout = () => {
-        vm.isLoggedIn = false;
-        $state.go('login');
         localStorage.clear();
+        $state.go('home');
       };
-
       if (token) {
         authService.ensureAuthenticated(token)
         .then((user) => {
@@ -30,7 +26,7 @@
           vm.current_user = user.data;
         })
         .catch((err) => {
-          throw new Error(err);
+          return new Error(err);
         });
       }
 
