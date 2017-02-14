@@ -23,7 +23,6 @@
       })
       .catch((err) => {
         vm.loginError = true;
-        vm.loginForm.$setPristine();
         return new Error(err);
       });
     };
