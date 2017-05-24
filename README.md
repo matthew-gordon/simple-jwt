@@ -1,4 +1,4 @@
-# Simple JWT app
+# Simple JWT ap
 
 Clone this Repo
 
